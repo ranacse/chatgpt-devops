@@ -1,11 +1,8 @@
-# Use Nginx as base image
 FROM nginx:alpine
 
-# Copy HTML file to Nginx directory
-COPY index.html /usr/share/nginx/html/
+# GitHub repo থেকে index.html pull করো
+RUN apk add --no-cache curl && \
+    curl -o /usr/share/nginx/html/index.html https://raw.githubusercontent.com/ranacse/chatgpt-devops/main/index.html
 
-# Expose port 80
 EXPOSE 80
-
-# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]
